@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Lora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/helpers/ThemeProvider";
-import Navbar from "@/components/ui/layout/navbar";
+import Navbar from "@/components/layout/navbar";
+import { PageTransition, StarBackground } from "@/components/global";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -38,8 +39,13 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <Navbar />
-          <div>{children}</div>
+          <StarBackground />
+          <PageTransition>
+            <div className="relative flex min-h-screen flex-col">
+              <Navbar />
+              <div className="flex-1">{children}</div>
+            </div>
+          </PageTransition>
         </ThemeProvider>
       </body>
     </html>
