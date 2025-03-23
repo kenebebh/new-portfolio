@@ -21,6 +21,45 @@ export default function Navbar() {
     { href: "#contact", label: "Contact" },
   ];
 
+  // Handle scroll to detect current section
+  useEffect(() => {
+    const handleScroll = () => {
+      // Get all sections
+      const sections = document.querySelectorAll("section[id]");
+
+      // Get current scroll position plus some offset to trigger slightly before reaching the section
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+      // Find the current section
+      sections.forEach((section) => {
+        const sectionTop = (section as HTMLElement).offsetTop;
+        const sectionHeight = (section as HTMLElement).offsetHeight;
+        const sectionId = section.id;
+
+        if (
+          scrollPosition >= sectionTop &&
+          scrollPosition < sectionTop + sectionHeight
+        ) {
+          setActiveSection(sectionId);
+
+          // Optionally update URL hash without triggering a scroll
+          // This is commented out because it can cause jumpy behavior
+          // history.replaceState(null, null, `#${sectionId}`)
+        }
+      });
+    };
+
+    // Add scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Initial check on mount
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
       <div className="flex h-16 items-center justify-between px-6 lg:px-12">
