@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
@@ -13,52 +13,48 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
-  const navItems = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#projects", label: "Projects" },
-    { href: "#skills", label: "Skills" },
-    { href: "#contact", label: "Contact" },
-  ];
+  // Memoized navigation items to prevent re-creating the array on every render
+  const navItems = useMemo(
+    () => [
+      { href: "#home", label: "Home" },
+      { href: "#about", label: "About" },
+      { href: "#projects", label: "Projects" },
+      { href: "#skills", label: "Skills" },
+      { href: "#contact", label: "Contact" },
+    ],
+    []
+  );
+
+  // Function to update active section from hash change
+  const handleHashChange = useCallback(() => {
+    const hash = window.location.hash.substring(1);
+    if (hash) setActiveSection(hash);
+  }, []);
 
   // Handle scroll to detect current section
-  useEffect(() => {
-    const handleScroll = () => {
-      // Get all sections
-      const sections = document.querySelectorAll("section[id]");
+  const handleScroll = useCallback(() => {
+    const sections = document.querySelectorAll("section[id]");
+    const scrollPosition = window.scrollY + window.innerHeight / 3;
 
-      // Get current scroll position plus some offset to trigger slightly before reaching the section
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
+    sections.forEach((section) => {
+      const sectionTop = (section as HTMLElement).offsetTop;
+      const sectionHeight = (section as HTMLElement).offsetHeight;
+      const sectionId = section.id;
 
-      // Find the current section
-      sections.forEach((section) => {
-        const sectionTop = (section as HTMLElement).offsetTop;
-        const sectionHeight = (section as HTMLElement).offsetHeight;
-        const sectionId = section.id;
-
-        if (
-          scrollPosition >= sectionTop &&
-          scrollPosition < sectionTop + sectionHeight
-        ) {
-          setActiveSection(sectionId);
-
-          // Optionally update URL hash without triggering a scroll
-          // This is commented out because it can cause jumpy behavior
-          // history.replaceState(null, null, `#${sectionId}`)
-        }
-      });
-    };
-
-    // Add scroll event listener
-    window.addEventListener("scroll", handleScroll);
-
-    // Initial check on mount
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+      if (
+        scrollPosition >= sectionTop &&
+        scrollPosition < sectionTop + sectionHeight
+      ) {
+        setActiveSection(sectionId);
+      }
+    });
   }, []);
+
+  // Attach scroll event only when navbar is mounted
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
@@ -102,7 +98,7 @@ export default function Navbar() {
             variant="ghost"
             size="icon"
             className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setIsOpen((prev) => !prev)}
           >
             {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             <span className="sr-only">Toggle menu</span>
