@@ -122,3 +122,33 @@
     @apply bg-background text-foreground font-lora;
   }
 }
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400;
+}
+
+.gradient-text-animated {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(
+    90deg,
+    #4b2c92,
+    #9c4dff,
+    #b57bff,
+    #9c4dff,
+    #4b2c92
+  );
+  background-size: 200% 100%;
+  animation: gradientShift 1s linear infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

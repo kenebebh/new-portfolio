@@ -18,7 +18,7 @@ export default function LoadingScreen() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="text-lg font-medium"
+        className="text-xl font-medium gradient-text-animated"
       >
         BEBH.DEV
       </motion.p>
@@ -26,7 +26,7 @@ export default function LoadingScreen() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="text-sm text-muted-foreground"
+        className="text-lg gradient-text-animated"
       >
         BRINGING PRODUCTS TO LIFE
       </motion.p>
