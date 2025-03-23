@@ -3,17 +3,7 @@ import { Geist, Geist_Mono, Lora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/helpers/ThemeProvider";
 import Navbar from "@/components/layout/navbar";
-import { PageTransition, StarBackground } from "@/components/global";
-
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+import { StarBackground, GlobalLoadingProvider } from "@/components/global";
 
 const loraSans = Lora({
   variable: "--font-lora-sans",
@@ -40,12 +30,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <StarBackground />
-          <PageTransition>
+          <GlobalLoadingProvider>
             <div className="relative flex min-h-screen flex-col">
               <Navbar />
               <div className="flex-1">{children}</div>
             </div>
-          </PageTransition>
+          </GlobalLoadingProvider>
         </ThemeProvider>
       </body>
     </html>
