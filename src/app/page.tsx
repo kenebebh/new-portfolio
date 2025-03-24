@@ -1,8 +1,12 @@
 import { About, Contact, Hero, Projects, Skills } from "@/components/sections";
+import { FullPageScroll } from "@/components/global";
 
 export default function Home() {
   return (
     <div className="mt-16">
+      {/* <FullPageScroll
+        sectionIds={["home", "about", "projects", "skills", "contact"]}
+      > */}
       <section id="home" className="section">
         <Hero />
       </section>
@@ -17,7 +21,8 @@ export default function Home() {
       </section>
       <section id="contact" className="section">
         <Contact />
-      </section>{" "}
+      </section>
+      {/* </FullPageScroll> */}
     </div>
   );
 }
