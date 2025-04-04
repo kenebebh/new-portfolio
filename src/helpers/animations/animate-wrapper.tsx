@@ -1,7 +1,12 @@
 "use client";
 
-import { motion, Variants, Transition } from "framer-motion";
-import { ReactNode } from "react";
+import {
+  motion,
+  type Variants,
+  type Transition,
+  useInView,
+} from "framer-motion";
+import { type ReactNode, useRef, useEffect, useState } from "react";
 
 type AnimationVariant =
   | "fadeIn"
@@ -17,6 +22,7 @@ interface AnimateWrapperProps {
   delay?: number;
   duration?: number;
   className?: string;
+  playOnLoad?: boolean; // New prop to control if animation plays on initial load
 }
 
 const variants: Record<AnimationVariant, Variants> = {
@@ -65,7 +71,23 @@ export function AnimateWrapper({
   delay = 0,
   duration,
   className = "",
+  playOnLoad = true, // Default to true for hero sections
 }: AnimateWrapperProps) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
+  // Handle both initial load and scroll-based animations
+  useEffect(() => {
+    // If playOnLoad is true, animate immediately
+    if (playOnLoad) {
+      setShouldAnimate(true);
+    } else {
+      // Otherwise, only animate when in view
+      setShouldAnimate(isInView);
+    }
+  }, [isInView, playOnLoad]);
+
   const transition: Transition = {
     ...transitions[variant],
     delay,
@@ -74,9 +96,9 @@ export function AnimateWrapper({
 
   return (
     <motion.div
+      ref={ref}
       initial="initial"
-      whileInView="animate"
-      viewport={{ once: true, margin: "-50px" }}
+      animate={shouldAnimate ? "animate" : "initial"}
       variants={variants[variant]}
       transition={transition}
       className={className}
