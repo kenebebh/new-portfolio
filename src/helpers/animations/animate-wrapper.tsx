@@ -39,7 +39,7 @@ const variants: Record<AnimationVariant, Variants> = {
     animate: { opacity: 1, x: 0 },
   },
   slideRight: {
-    initial: { opacity: 0, x: -20 },
+    initial: { opacity: 0, x: -30 },
     animate: { opacity: 1, x: 0 },
   },
   scale: {
