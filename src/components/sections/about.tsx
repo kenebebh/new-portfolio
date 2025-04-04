@@ -14,9 +14,9 @@ export default function About() {
           >
             <Image
               src="/images/image-no-bg.png"
-              // src="/images/about_img-high.png"
               alt="Senior Software Engineer"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover object-center transition-transform duration-500 ease-in-out transform hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
