@@ -30,12 +30,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <StarBackground />
-          <GlobalLoadingProvider>
-            <div className="relative flex min-h-screen flex-col">
-              <Navbar />
-              <div className="flex-1">{children}</div>
-            </div>
-          </GlobalLoadingProvider>
+          {/* <GlobalLoadingProvider> */}
+          <div className="relative flex min-h-screen flex-col">
+            <Navbar />
+            <div className="flex-1">{children}</div>
+          </div>
+          {/* </GlobalLoadingProvider> */}
         </ThemeProvider>
       </body>
     </html>
