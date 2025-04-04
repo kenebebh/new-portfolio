@@ -148,7 +148,7 @@ export default function FullPageScroll({
   );
 
   return (
-    <div className="h-screen w-full overflow-hidden">
+    <div className="relative h-screen w-full overflow-hidden">
       <AnimatePresence initial={false} mode="wait">
         <motion.div
           key={currentIndex}
@@ -161,9 +161,10 @@ export default function FullPageScroll({
             damping: 30,
             opacity: { duration: 0.5 },
           }}
-          className="absolute inset-0 w-full h-full"
+          // className="absolute inset-0 w-full h-full bg-green-500"
+          className="absolute inset-0 flex items-center justify-center h-full w-full"
         >
-          {children[currentIndex]}
+          <div className="h-full w-full">{children[currentIndex]}</div>
         </motion.div>
       </AnimatePresence>
 

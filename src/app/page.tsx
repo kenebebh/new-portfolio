@@ -7,10 +7,10 @@ export default function Home() {
   return (
     <div className="mt-16">
       <FullPageScroll sectionIds={sectionIds}>
-        <section id="home">
+        <section id="home" className="bg-blue-500">
           <Hero />
         </section>
-        <section id="about">
+        <section id="about" className="bg-green-500">
           <About />
         </section>
         <section id="projects">
