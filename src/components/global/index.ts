@@ -3,6 +3,7 @@ import { StarBackground } from "./star-background";
 import LoadingScreen from "./loading-screen";
 import GlobalLoadingProvider from "./global-loading-provider";
 import FullPageScroll from "./full-page-scroll";
+import ResponsivePageLayout from "./responsive-page-layout";
 
 export {
   LogoFloat,
@@ -10,4 +11,5 @@ export {
   LoadingScreen,
   GlobalLoadingProvider,
   FullPageScroll,
+  ResponsivePageLayout,
 };
