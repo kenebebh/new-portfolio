@@ -7,13 +7,11 @@ import { motion, AnimatePresence } from "framer-motion";
 interface FullPageScrollProps {
   children: React.ReactNode[];
   sectionIds: string[];
-  parentSection?: string; // Optional parent section for nested scrolling
 }
 
 export default function FullPageScroll({
   children,
   sectionIds,
-  parentSection,
 }: FullPageScrollProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for previous, 1 for next
@@ -36,46 +34,24 @@ export default function FullPageScroll({
   // Get initial section from URL hash if present
   useEffect(() => {
     const hash = window.location.hash.substring(1);
-
-    // Handle nested hash format: "projects#project-1"
-    if (parentSection && hash.startsWith(parentSection)) {
-      const nestedHash = hash.split("#")[1];
-      if (nestedHash && sectionIds.includes(nestedHash)) {
-        const index = sectionIds.indexOf(nestedHash);
-        setCurrentIndex(index);
-      }
-    }
-    // Handle regular hash
-    else if (hash && sectionIds.includes(hash)) {
+    if (hash && sectionIds.includes(hash)) {
       const index = sectionIds.indexOf(hash);
       setCurrentIndex(index);
     }
-  }, [sectionIds, parentSection]);
+  }, [sectionIds]);
 
   // Update URL hash when section changes
   useEffect(() => {
     if (sectionIds[currentIndex]) {
-      // For nested sections, use format: "projects#project-1"
-      if (parentSection) {
-        window.history.replaceState(
-          null,
-          "",
-          `#${parentSection}#${sectionIds[currentIndex]}`
-        );
-      } else {
-        window.history.replaceState(null, "", `#${sectionIds[currentIndex]}`);
-      }
+      window.history.replaceState(null, "", `#${sectionIds[currentIndex]}`);
 
       // Dispatch a custom event to notify other components (like Navbar)
       const sectionChangeEvent = new CustomEvent("sectionChange", {
-        detail: {
-          section: parentSection || sectionIds[currentIndex],
-          subSection: parentSection ? sectionIds[currentIndex] : null,
-        },
+        detail: { section: sectionIds[currentIndex] },
       });
       window.dispatchEvent(sectionChangeEvent);
     }
-  }, [currentIndex, sectionIds, parentSection]);
+  }, [currentIndex, sectionIds]);
 
   // Listen for custom navigation events from Navbar
   useEffect(() => {
@@ -140,20 +116,7 @@ export default function FullPageScroll({
   useEffect(() => {
     const handlePopState = () => {
       const hash = window.location.hash.substring(1);
-
-      // Handle nested hash format: "projects#project-1"
-      if (parentSection && hash.startsWith(parentSection)) {
-        const nestedHash = hash.split("#")[1];
-        if (nestedHash && sectionIds.includes(nestedHash)) {
-          const newIndex = sectionIds.indexOf(nestedHash);
-          const newDirection = newIndex > currentIndex ? 1 : -1;
-
-          setDirection(newDirection);
-          setCurrentIndex(newIndex);
-        }
-      }
-      // Handle regular hash
-      else if (hash && sectionIds.includes(hash)) {
+      if (hash && sectionIds.includes(hash)) {
         const newIndex = sectionIds.indexOf(hash);
         const newDirection = newIndex > currentIndex ? 1 : -1;
 
@@ -164,7 +127,7 @@ export default function FullPageScroll({
 
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
-  }, [currentIndex, sectionIds, parentSection]);
+  }, [currentIndex, sectionIds]);
 
   // Add navigation dots
   const renderNavigationDots = () => (
@@ -198,6 +161,7 @@ export default function FullPageScroll({
             damping: 30,
             opacity: { duration: 0.5 },
           }}
+          // className="absolute inset-0 w-full h-full bg-green-500"
           className="absolute inset-0 flex items-center justify-center h-full w-full"
         >
           <div className="h-full w-full">{children[currentIndex]}</div>
