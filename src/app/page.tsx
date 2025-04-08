@@ -1,6 +1,13 @@
 "use client";
 
 import { About, Contact, Hero, Projects, Skills } from "@/components/sections";
+import {
+  AboutResponsive,
+  ContactResponsive,
+  HeroResponsive,
+  ProjectsResponsive,
+  SkillsResponsive,
+} from "@/components/sections/responsive";
 import { FullPageScroll, ResponsivePageLayout } from "@/components/global";
 import { useMediaQuery } from "@/hooks";
 
@@ -38,19 +45,19 @@ export default function Home() {
   return (
     <ResponsivePageLayout sectionIds={sectionIds}>
       <section id="home" className="min-h-screen">
-        <Hero />
+        <HeroResponsive />
       </section>
       <section id="about" className="min-h-screen">
-        <About />
+        <AboutResponsive />
       </section>
       <section id="projects" className="min-h-screen">
-        <Projects />
+        <ProjectsResponsive />
       </section>
       <section id="skills" className="min-h-screen">
-        <Skills />
+        <SkillsResponsive />
       </section>
       <section id="contact" className="min-h-screen">
-        <Contact />
+        <ContactResponsive />
       </section>
     </ResponsivePageLayout>
   );

@@ -1,35 +1,31 @@
 "use client";
 
 import type React from "react";
+import { useEffect, useState } from "react";
 
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-
-interface ResponsivePageLayoutProps {
-  children: React.ReactNode[];
+interface ResponsiveScrollLayoutProps {
+  children: React.ReactNode;
   sectionIds: string[];
 }
 
-export default function ResponsivePageLayout({
+export default function ResponsiveScrollLayout({
   children,
   sectionIds,
-}: ResponsivePageLayoutProps) {
+}: ResponsiveScrollLayoutProps) {
   const [activeSection, setActiveSection] = useState("");
-  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
-
-  // Initialize section refs
-  useEffect(() => {
-    sectionRefs.current = sectionIds.map((id) => document.getElementById(id));
-  }, [sectionIds]);
 
   // Track active section on scroll
   useEffect(() => {
     const handleScroll = () => {
+      // Get all sections
+      const sections = sectionIds.map((id) => document.getElementById(id));
+
+      // Get current scroll position plus some offset
       const scrollPosition = window.scrollY + window.innerHeight / 3;
 
       // Find the current section
-      for (let i = 0; i < sectionRefs.current.length; i++) {
-        const section = sectionRefs.current[i];
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
         if (!section) continue;
 
         const sectionTop = section.offsetTop;
@@ -39,17 +35,18 @@ export default function ResponsivePageLayout({
           scrollPosition >= sectionTop &&
           scrollPosition < sectionTop + sectionHeight
         ) {
-          setActiveSection(sectionIds[i]);
+          if (activeSection !== sectionIds[i]) {
+            setActiveSection(sectionIds[i]);
 
-          // Update URL hash without scrolling
-          window.history.replaceState(null, "", `#${sectionIds[i]}`);
+            // Update URL hash without scrolling
+            window.history.replaceState(null, "", `#${sectionIds[i]}`);
 
-          // Dispatch section change event for navbar
-          const sectionChangeEvent = new CustomEvent("sectionChange", {
-            detail: { section: sectionIds[i] },
-          });
-          window.dispatchEvent(sectionChangeEvent);
-
+            // Dispatch section change event for navbar
+            const sectionChangeEvent = new CustomEvent("sectionChange", {
+              detail: { section: sectionIds[i] },
+            });
+            window.dispatchEvent(sectionChangeEvent);
+          }
           break;
         }
       }
@@ -57,15 +54,15 @@ export default function ResponsivePageLayout({
 
     window.addEventListener("scroll", handleScroll);
     // Initial check
-    handleScroll();
+    setTimeout(handleScroll, 100);
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [sectionIds]);
+  }, [sectionIds, activeSection]);
 
   // Add navigation dots
   const renderNavigationDots = () => (
     <div className="fixed right-4 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-50">
-      {sectionIds.map((id, i) => (
+      {sectionIds.map((id) => (
         <button
           key={id}
           onClick={() => {
@@ -90,24 +87,7 @@ export default function ResponsivePageLayout({
 
   return (
     <div className="relative">
-      {children.map((child, index) => (
-        <motion.div
-          key={sectionIds[index]}
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 30,
-            opacity: { duration: 0.5 },
-          }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="min-h-screen w-full flex items-center justify-center"
-        >
-          {child}
-        </motion.div>
-      ))}
-
+      {children}
       {renderNavigationDots()}
     </div>
   );
