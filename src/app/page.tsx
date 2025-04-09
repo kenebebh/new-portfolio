@@ -14,7 +14,6 @@ import { useMediaQuery } from "@/hooks";
 export default function Home() {
   const sectionIds = ["home", "about", "projects", "skills", "contact"];
   const isLargeScreen = useMediaQuery("(min-width: 1024px)"); // lg breakpoint in Tailwind
-  console.log(isLargeScreen);
 
   // For large screens, use FullPageScroll
   if (isLargeScreen) {
@@ -45,7 +44,7 @@ export default function Home() {
   return (
     <ResponsivePageLayout sectionIds={sectionIds}>
       <section id="home" className="min-h-screen">
-        <HeroResponsive />
+        <Hero />
       </section>
       <section id="about" className="min-h-screen">
         <AboutResponsive />

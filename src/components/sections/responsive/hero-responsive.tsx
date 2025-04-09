@@ -1,13 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { AnimateWrapper } from "@/helpers/animations";
+import { SectionWrapper } from "@/helpers";
 
 export default function HeroResponsive() {
   return (
-    <div className="py-24 md:py-32 flex items-center min-h-[80vh]">
+    <div className="py-24 pt-12 md:py-32 flex items-center min-h-screen">
       <div className="container px-4">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div

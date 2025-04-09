@@ -8,10 +8,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { AnimateWrapper } from "@/helpers/animations";
 import { SectionWrapper } from "@/helpers";
+import { useMediaQuery } from "@/hooks";
 
 export default function Hero() {
   // State to control animation on initial load
   const [isLoaded, setIsLoaded] = useState(false);
+  const isLargeScreen = useMediaQuery("(min-width: 1024px)"); // lg breakpoint in Tailwind
+  console.log(isLargeScreen);
 
   // Set isLoaded to true after component mounts
   useEffect(() => {
@@ -48,7 +51,13 @@ export default function Hero() {
 
   return (
     <SectionWrapper>
-      <div className="h-full w-full flex flex-col items-center justify-center relative overflow-hidden">
+      <div
+        className={
+          isLargeScreen
+            ? "h-full w-full flex flex-col items-center justify-center relative overflow-hidden"
+            : "py-24 md:py-32 flex items-center min-h-screen"
+        }
+      >
         {/* Background elements */}
         <motion.div
           initial={{ opacity: 0 }}
