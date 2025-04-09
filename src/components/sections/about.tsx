@@ -41,7 +41,7 @@ export default function About() {
 
             <div className="space-y-4">
               <p className="text-lg">
-                I’m drawn to projects that challenge me, push me to think
+                I'm drawn to projects that challenge me, push me to think
                 outside the box, and ultimately make a difference for both
                 businesses and users. I thrive in fast-paced startup
                 environments, where I'm constantly learning, solving real

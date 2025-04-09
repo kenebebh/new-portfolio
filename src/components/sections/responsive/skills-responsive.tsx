@@ -75,7 +75,7 @@ const techStacks = [
 export default function SkillsResponsive() {
   return (
     <div className="py-24">
-      <div className="container px-4">
+      <div className="px-4">
         <div className="text-center mb-12">
           <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">
             Skills

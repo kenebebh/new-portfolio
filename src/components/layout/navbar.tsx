@@ -145,7 +145,7 @@ export default function Navbar() {
           animate={{ opacity: 1, height: "auto" }}
           className="md:hidden border-b"
         >
-          <div className="container py-4 flex flex-col gap-4">
+          <div className="py-4 flex flex-col gap-4">
             {navItems.map((item) => (
               <Link
                 key={item.href}

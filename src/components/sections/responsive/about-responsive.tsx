@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function AboutResponsive() {
   return (
-    <div className="py-24">
+    <div className="py-24 pt-8">
       <div className="px-4">
         <div className="grid gap-12 md:grid-cols-2 items-center">
           <motion.div
