@@ -4,7 +4,6 @@ import { About, Contact, Hero, Projects, Skills } from "@/components/sections";
 import {
   AboutResponsive,
   ContactResponsive,
-  HeroResponsive,
   ProjectsResponsive,
   SkillsResponsive,
 } from "@/components/sections/responsive";
