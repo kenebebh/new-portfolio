@@ -66,7 +66,7 @@ export default function AboutResponsive() {
               </p>
               <p>
                 Beyond coding, I'm into indie hacking, community-driven tech,
-                and food 🍕🍣—because good code and good food just make life
+                and food 🍕🌮—because good code and good food just make life
                 better! I believe great products are born from collaboration,
                 curiosity, and a commitment to continuous learning—and that's
                 exactly the kind of environment I love being part of..

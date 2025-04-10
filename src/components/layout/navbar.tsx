@@ -33,7 +33,7 @@ export default function Navbar() {
       // If hash exists, update active section
       if (hash) {
         setActiveSection(hash);
-        console.log("Active section changed to:", hash);
+        // console.log("Active section changed to:", hash);
       } else {
         // Default to home if no hash
         setActiveSection("home");
