@@ -28,8 +28,10 @@ export default function ResponsiveScrollLayout({
         const section = sections[i];
         if (!section) continue;
 
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
+        // Cast section to HTMLElement to access offsetTop and offsetHeight
+        const htmlSection = section as HTMLElement;
+        const sectionTop = htmlSection.offsetTop;
+        const sectionHeight = htmlSection.offsetHeight;
 
         if (
           scrollPosition >= sectionTop &&
@@ -58,6 +60,32 @@ export default function ResponsiveScrollLayout({
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, [sectionIds, activeSection]);
+
+  // Handle navigation from navbar
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        const targetElement = document.getElementById(hash);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 64, // Adjust for header height
+            behavior: "smooth",
+          });
+        }
+      }
+    };
+
+    // Listen for hash changes
+    window.addEventListener("hashchange", handleHashChange);
+
+    // Initial check
+    handleHashChange();
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
 
   return <div className="relative">{children}</div>;
 }

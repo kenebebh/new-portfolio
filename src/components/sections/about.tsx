@@ -2,8 +2,12 @@ import React from "react";
 import Image from "next/image";
 import { SectionWrapper } from "@/helpers";
 import { AnimateWrapper } from "@/helpers/animations";
+import { useTheme } from "next-themes";
 
 export default function About() {
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
+
   return (
     <SectionWrapper>
       <div className="h-full w-full flex items-center justify-center p-4 md:p-12">
@@ -19,7 +23,9 @@ export default function About() {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover object-center transition-transform duration-500 ease-in-out transform hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+            {isDarkMode && (
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+            )}
           </AnimateWrapper>
 
           <AnimateWrapper

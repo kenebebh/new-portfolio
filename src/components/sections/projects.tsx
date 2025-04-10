@@ -150,7 +150,7 @@ export default function Projects() {
             <button
               key={index}
               className={`w-3 h-3 rounded-full transition-all ${
-                currentProject === index ? "bg-primary w-8" : "bg-muted"
+                currentProject === index ? "bg-primary w-8" : "bg-ring"
               }`}
               onClick={() => navigateToProject(index)}
               aria-label={`Navigate to project ${index + 1}`}

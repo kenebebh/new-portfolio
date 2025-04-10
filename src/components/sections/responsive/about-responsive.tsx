@@ -1,11 +1,23 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { AnimateWrapper } from "@/helpers/animations";
+import { useTheme } from "next-themes";
 
 export default function AboutResponsive() {
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
+
   return (
-    <div className="py-24 pt-8">
+    <div className="py-12">
       <div className="px-4">
+        <AnimateWrapper variant="slideUp">
+          <div className="text-center">
+            <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary mb-4">
+              About Me
+            </div>
+          </div>
+        </AnimateWrapper>
         <div className="grid gap-12 md:grid-cols-2 items-center">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -22,7 +34,9 @@ export default function AboutResponsive() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover object-center transition-transform duration-500 ease-in-out transform hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+              {isDarkMode && (
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+              )}
             </div>
           </motion.div>
 
@@ -33,9 +47,6 @@ export default function AboutResponsive() {
             viewport={{ once: true, margin: "-50px" }}
             className="order-2 md:order-2"
           >
-            <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary mb-4">
-              About Me
-            </div>
             <h2 className="text-3xl font-bold mb-4">
               Hi, I'm <span className="text-primary">Banigo Kenebebh</span>
             </h2>

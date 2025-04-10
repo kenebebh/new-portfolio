@@ -53,7 +53,7 @@ export default function Contact() {
   return (
     <SectionWrapper>
       <div className="h-full w-full flex items-center justify-center p-4 md:p-12">
-        <div className="grid md:grid-cols-2 gap-12 max-w-7xl w-full items-center">
+        <div className="grid md:grid-cols-2 gap-12 max-w-7xl w-full items-center justify-center">
           <AnimateWrapper
             variant="slideRight"
             className="flex flex-col justify-center"
