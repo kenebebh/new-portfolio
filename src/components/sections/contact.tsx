@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Send } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -26,31 +26,41 @@ const contactPhrases = [
 ];
 
 export default function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentPhrase, setCurrentPhrase] = useState(0);
-
   const formRef = useRef<HTMLFormElement>(null);
+
   const [form, setForm] = useState({
     name: "",
     email: "",
     message: "",
   });
+
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
+  // Rotate through phrases - fixed to use useEffect instead of useState
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPhrase((prev) => (prev + 1) % contactPhrases.length);
+    }, 3000);
 
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
     emailjs
       .send(
-        "service_qo8x3np",
-        "template_xz7iooi",
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string,
         {
           from_name: form.name,
           to_name: "Kene",
@@ -58,7 +68,7 @@ export default function Contact() {
           to_email: "kenebebhbanigo@gmail.com",
           message: form.message,
         },
-        "ESzMZ_WcOF5LWpCeI"
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string
       )
       .then(
         () => {
@@ -75,19 +85,11 @@ export default function Contact() {
         },
         (error) => {
           setLoading(false);
+          console.error("Error sending email:", error);
           toast.error("Something went wrong, please try again");
         }
       );
   };
-
-  // Rotate through phrases
-  useState(() => {
-    const interval = setInterval(() => {
-      setCurrentPhrase((prev) => (prev + 1) % contactPhrases.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  });
 
   return (
     <SectionWrapper>
@@ -154,6 +156,7 @@ export default function Contact() {
                   <Label htmlFor="name">Name</Label>
                   <Input
                     id="name"
+                    name="name" // Added name attribute
                     placeholder="Your name"
                     value={form.name}
                     onChange={handleChange}
@@ -165,6 +168,7 @@ export default function Contact() {
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
+                    name="email" // Added name attribute
                     type="email"
                     value={form.email}
                     onChange={handleChange}
@@ -177,8 +181,9 @@ export default function Contact() {
                   <Label htmlFor="message">Message</Label>
                   <Textarea
                     id="message"
+                    name="message" // Added name attribute
                     placeholder="Leave me a message"
-                    rows={10}
+                    rows={5}
                     value={form.message}
                     onChange={handleChange}
                     required
@@ -189,9 +194,9 @@ export default function Contact() {
                   type="submit"
                   className="w-full"
                   size="lg"
-                  disabled={isSubmitting}
+                  disabled={loading}
                 >
-                  {isSubmitting ? (
+                  {loading ? (
                     <>
                       <AnimateWrapper variant="bounce" className="mr-2">
                         <Send className="h-4 w-4" />
