@@ -4,49 +4,21 @@ import type React from "react";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ExternalLink,
+  Github,
+  ChevronLeft,
+  ChevronRight,
+  Lock,
+} from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SectionWrapper } from "@/helpers";
-
-// Sample project data
-const projects = [
-  {
-    id: 1,
-    title: "SaaS Platform",
-    description:
-      "A scalable SaaS platform with multi-tenant architecture, real-time analytics, and performance optimization. This project demonstrates my ability to build complex applications that can handle high traffic and scale with business needs.",
-    image: "/images/image-no-bg.png",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "Redis", "AWS"],
-    demoUrl: "#",
-    repoUrl: "#",
-    color: "from-purple-500 to-blue-500",
-  },
-  {
-    id: 2,
-    title: "AI-Powered Dashboard",
-    description:
-      "An admin dashboard with real-time data processing, complex state management, and AI-driven insights. This project showcases my expertise in building data-intensive applications with intuitive user interfaces.",
-    image: "/images/image-no-bg.png",
-    tags: ["React", "Node.js", "TensorFlow.js", "WebSockets", "Docker"],
-    demoUrl: "#",
-    repoUrl: "#",
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    id: 3,
-    title: "Travel Booking Engine",
-    description:
-      "A high-performance travel booking system with complex caching strategies and distributed architecture. This project demonstrates my ability to build systems that require high availability and real-time data processing.",
-    image: "/images/image-no-bg.png",
-    tags: ["Vue.js", "GraphQL", "Elasticsearch", "Redis", "Microservices"],
-    demoUrl: "#",
-    repoUrl: "#",
-    color: "from-green-500 to-emerald-500",
-  },
-];
+import { projects } from "../constants";
+import { TooltipWrapper } from "@/components/ui/tooltip-wrapper";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export default function Projects() {
   const [currentProject, setCurrentProject] = useState(0);
@@ -150,7 +122,7 @@ export default function Projects() {
             <button
               key={index}
               className={`w-3 h-3 rounded-full transition-all ${
-                currentProject === index ? "bg-primary w-8" : "bg-muted"
+                currentProject === index ? "bg-primary w-8" : "bg-ring"
               }`}
               onClick={() => navigateToProject(index)}
               aria-label={`Navigate to project ${index + 1}`}
@@ -167,14 +139,26 @@ function ProjectComponent({ project }: { project: (typeof projects)[0] }) {
   return (
     <div className="h-full w-full flex flex-col md:flex-row items-center justify-center p-4 md:p-12">
       <div className="flex flex-col justify-center h-full md:w-1/2 p-4 md:p-8">
-        <motion.h3
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-4xl font-bold mb-4"
-        >
-          {project.title}
-        </motion.h3>
+        <div className="flex justify-between items-center">
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-4xl font-bold mb-4"
+          >
+            {project.title}
+          </motion.h3>
+
+          {project.isPrivate && (
+            <Badge
+              variant="outline"
+              className="border-yellow-400 text-yellow-400"
+            >
+              <Lock className="mr-1 h-3 w-3" />
+              Private
+            </Badge>
+          )}
+        </div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -210,12 +194,31 @@ function ProjectComponent({ project }: { project: (typeof projects)[0] }) {
               Live Demo
             </a>
           </Button>
-          <Button variant="outline" asChild>
-            <a href={project.repoUrl} target="_blank" rel="noreferrer">
-              <Github className="mr-2 h-4 w-4" />
-              View Code
-            </a>
-          </Button>
+
+          {project.isPrivate ? (
+            <TooltipProvider>
+              <TooltipWrapper content="This repository is private and the source code is not publicly available">
+                <div className="inline-block">
+                  <Button
+                    variant="outline"
+                    disabled
+                    className="cursor-not-allowed opacity-70"
+                    aria-label="Source code is private"
+                  >
+                    <Lock className="mr-2 h-4 w-4" />
+                    Private Code
+                  </Button>
+                </div>
+              </TooltipWrapper>
+            </TooltipProvider>
+          ) : (
+            <Button variant="outline" asChild>
+              <a href={project.repoUrl} target="_blank" rel="noreferrer">
+                <Github className="mr-2 h-4 w-4" />
+                View Code
+              </a>
+            </Button>
+          )}
         </motion.div>
       </div>
 
@@ -232,9 +235,9 @@ function ProjectComponent({ project }: { project: (typeof projects)[0] }) {
           <Image
             src={project.image || "/placeholder.svg"}
             alt={project.title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover"
+            width={1000}
+            height={2000}
+            className="object-fill w-full h-full"
           />
         </motion.div>
       </div>

@@ -200,3 +200,91 @@ function ShootingStars() {
     </>
   );
 }
+
+//minimal star code with no shooting stars
+// "use client";
+
+// import { useEffect, useState } from "react";
+// import { useTheme } from "next-themes";
+
+// // Simplified star background with minimal code
+// export function StarBackground() {
+//   const { theme } = useTheme();
+//   const [mounted, setMounted] = useState(false);
+//   const [stars, setStars] = useState<React.JSX.Element[]>([]);
+
+//   useEffect(() => {
+//     setMounted(true);
+
+//     // Create stars only once after component mounts
+//     const createStars = () => {
+//       const newStars: React.JSX.Element[] = [];
+//       const starCount = 100; // Fixed number of stars
+
+//       for (let i = 0; i < starCount; i++) {
+//         // Random properties for each star
+//         const size = Math.random() * 2 + 1;
+//         const opacity = Math.random() * 0.5 + 0.3;
+
+//         // Position stars within viewport using viewport units
+//         const x = `${Math.random() * 95}vw`; // Keep away from edges
+//         const y = `${Math.random() * 95}vh`; // Keep away from edges
+
+//         newStars.push(
+//           <div
+//             key={i}
+//             className="absolute rounded-full bg-white"
+//             style={{
+//               width: `${size}px`,
+//               height: `${size}px`,
+//               left: x,
+//               top: y,
+//               opacity: opacity,
+//               animation:
+//                 Math.random() > 0.7
+//                   ? `blink ${Math.random() * 3 + 2}s infinite`
+//                   : "none",
+//             }}
+//           />
+//         );
+//       }
+
+//       setStars(newStars);
+//     };
+
+//     createStars();
+
+//     // Add CSS for blinking animation
+//     const style = document.createElement("style");
+//     style.innerHTML = `
+//       @keyframes blink {
+//         0%, 100% { opacity: var(--opacity); }
+//         50% { opacity: calc(var(--opacity) * 0.3); }
+//       }
+//     `;
+//     document.head.appendChild(style);
+
+//     return () => {
+//       document.head.removeChild(style);
+//     };
+//   }, []);
+
+//   if (!mounted || theme === "light") return null;
+
+//   return (
+//     <div
+//       style={{
+//         position: "fixed",
+//         top: 0,
+//         left: 0,
+//         width: "100vw",
+//         height: "100vh",
+//         overflow: "hidden",
+//         pointerEvents: "none",
+//         zIndex: 0,
+//       }}
+//     >
+//       {stars}
+//     </div>
+//   );
+// }

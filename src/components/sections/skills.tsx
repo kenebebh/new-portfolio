@@ -42,7 +42,6 @@ const techStacks = [
     technologies: [
       { name: "Node.js", icon: Server },
       { name: "Express", icon: Layers },
-      { name: "GraphQL", icon: Braces },
       { name: "REST APIs", icon: Globe },
       { name: "Authentication", icon: Cpu },
     ],
@@ -56,7 +55,6 @@ const techStacks = [
       { name: "MongoDB", icon: Database },
       { name: "Redis", icon: Database },
       { name: "Prisma", icon: Layers },
-      { name: "SQL", icon: FileCode },
     ],
   },
   {
@@ -66,8 +64,6 @@ const techStacks = [
     technologies: [
       { name: "Responsive Design", icon: Smartphone },
       { name: "Figma", icon: Figma },
-      { name: "Wireframing", icon: PenTool },
-      { name: "Prototyping", icon: Monitor },
       { name: "Accessibility", icon: Globe },
     ],
   },
@@ -113,7 +109,7 @@ export default function Skills() {
                     <h3 className="text-2xl font-bold">{stack.category}</h3>
                   </div>
 
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-2 xl:grid-cols-3 gap-4">
                     {stack.technologies.map((tech, techIndex) => (
                       <AnimateWrapper
                         key={tech.name}

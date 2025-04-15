@@ -2,8 +2,12 @@ import React from "react";
 import Image from "next/image";
 import { SectionWrapper } from "@/helpers";
 import { AnimateWrapper } from "@/helpers/animations";
+import { useTheme } from "next-themes";
 
 export default function About() {
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
+
   return (
     <SectionWrapper>
       <div className="h-full w-full flex items-center justify-center p-4 md:p-12">
@@ -19,7 +23,9 @@ export default function About() {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover object-center transition-transform duration-500 ease-in-out transform hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+            {isDarkMode && (
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+            )}
           </AnimateWrapper>
 
           <AnimateWrapper
@@ -41,7 +47,7 @@ export default function About() {
 
             <div className="space-y-4">
               <p className="text-lg">
-                I’m drawn to projects that challenge me, push me to think
+                I'm drawn to projects that challenge me, push me to think
                 outside the box, and ultimately make a difference for both
                 businesses and users. I thrive in fast-paced startup
                 environments, where I'm constantly learning, solving real
@@ -49,7 +55,7 @@ export default function About() {
               </p>
               <p className="text-lg">
                 Beyond coding, I'm into indie hacking, community-driven tech,
-                and food 🍕🍣—because good code and good food just make life
+                and food 🍕🌮—because good code and good food just make life
                 better! I believe great products are born from collaboration,
                 curiosity, and a commitment to continuous learning—and that's
                 exactly the kind of environment I love being part of.
