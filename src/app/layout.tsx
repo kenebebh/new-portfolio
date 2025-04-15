@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Lora } from "next/font/google";
+import { Lora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/helpers/ThemeProvider";
 import Navbar from "@/components/layout/navbar";
@@ -10,6 +10,25 @@ const loraSans = Lora({
   variable: "--font-lora-sans",
   subsets: ["latin"],
 });
+
+// const geist = Geist({
+//   variable: "--font-geist",
+//   subsets: ["latin"],
+//   display: "swap",
+// });
+
+// const playfair = Playfair_Display({
+//   variable: "--font-playfair",
+//   subsets: ["latin"],
+//   display: "swap",
+// });
+
+// const lato = Lato({
+//   variable: "--font-lato",
+//   subsets: ["latin"],
+//   display: "swap",
+//   weight: ["300", "400", "700", "900"],
+// });
 
 export const metadata: Metadata = {
   title: "Banigo Kene's Portfolio",
