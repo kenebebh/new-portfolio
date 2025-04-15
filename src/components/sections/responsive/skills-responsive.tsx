@@ -101,7 +101,7 @@ export default function SkillsResponsive() {
               <div
                 className={`absolute inset-0 ${stack.color} opacity-5 rounded-lg`}
               />
-              <div className="relative p-6 rounded-lg border backdrop-blur-sm">
+              <div className="relative p-6 rounded-lg border backdrop-blur-sm h-full">
                 <div className="flex items-center gap-4 mb-4">
                   <div
                     className={`p-3 rounded-full ${stack.color} bg-opacity-20`}

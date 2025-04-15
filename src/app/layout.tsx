@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/helpers/ThemeProvider";
 import Navbar from "@/components/layout/navbar";
 import { StarBackground, GlobalLoadingProvider } from "@/components/global";
+import { Toaster } from "@/components/ui/sonner";
 
 const loraSans = Lora({
   variable: "--font-lora-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
           <GlobalLoadingProvider>
             <div className="relative flex min-h-screen flex-col">
               <Navbar />
+              <Toaster position="top-right" richColors />
               <div className="flex-1">{children}</div>
             </div>
           </GlobalLoadingProvider>

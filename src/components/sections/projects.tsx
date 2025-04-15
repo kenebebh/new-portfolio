@@ -10,43 +10,44 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SectionWrapper } from "@/helpers";
+import { projects } from "../constants";
 
 // Sample project data
-const projects = [
-  {
-    id: 1,
-    title: "SaaS Platform",
-    description:
-      "A scalable SaaS platform with multi-tenant architecture, real-time analytics, and performance optimization. This project demonstrates my ability to build complex applications that can handle high traffic and scale with business needs.",
-    image: "/images/image-no-bg.png",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "Redis", "AWS"],
-    demoUrl: "#",
-    repoUrl: "#",
-    color: "from-purple-500 to-blue-500",
-  },
-  {
-    id: 2,
-    title: "AI-Powered Dashboard",
-    description:
-      "An admin dashboard with real-time data processing, complex state management, and AI-driven insights. This project showcases my expertise in building data-intensive applications with intuitive user interfaces.",
-    image: "/images/image-no-bg.png",
-    tags: ["React", "Node.js", "TensorFlow.js", "WebSockets", "Docker"],
-    demoUrl: "#",
-    repoUrl: "#",
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    id: 3,
-    title: "Travel Booking Engine",
-    description:
-      "A high-performance travel booking system with complex caching strategies and distributed architecture. This project demonstrates my ability to build systems that require high availability and real-time data processing.",
-    image: "/images/image-no-bg.png",
-    tags: ["Vue.js", "GraphQL", "Elasticsearch", "Redis", "Microservices"],
-    demoUrl: "#",
-    repoUrl: "#",
-    color: "from-green-500 to-emerald-500",
-  },
-];
+// const projects = [
+//   {
+//     id: 1,
+//     title: "SaaS Platform",
+//     description:
+//       "A scalable SaaS platform with multi-tenant architecture, real-time analytics, and performance optimization. This project demonstrates my ability to build complex applications that can handle high traffic and scale with business needs.",
+//     image: "/images/image-no-bg.png",
+//     tags: ["Next.js", "TypeScript", "PostgreSQL", "Redis", "AWS"],
+//     demoUrl: "#",
+//     repoUrl: "#",
+//     color: "from-purple-500 to-blue-500",
+//   },
+//   {
+//     id: 2,
+//     title: "AI-Powered Dashboard",
+//     description:
+//       "An admin dashboard with real-time data processing, complex state management, and AI-driven insights. This project showcases my expertise in building data-intensive applications with intuitive user interfaces.",
+//     image: "/images/image-no-bg.png",
+//     tags: ["React", "Node.js", "TensorFlow.js", "WebSockets", "Docker"],
+//     demoUrl: "#",
+//     repoUrl: "#",
+//     color: "from-blue-500 to-cyan-500",
+//   },
+//   {
+//     id: 3,
+//     title: "Travel Booking Engine",
+//     description:
+//       "A high-performance travel booking system with complex caching strategies and distributed architecture. This project demonstrates my ability to build systems that require high availability and real-time data processing.",
+//     image: "/images/image-no-bg.png",
+//     tags: ["Vue.js", "GraphQL", "Elasticsearch", "Redis", "Microservices"],
+//     demoUrl: "#",
+//     repoUrl: "#",
+//     color: "from-green-500 to-emerald-500",
+//   },
+// ];
 
 export default function Projects() {
   const [currentProject, setCurrentProject] = useState(0);
@@ -232,9 +233,9 @@ function ProjectComponent({ project }: { project: (typeof projects)[0] }) {
           <Image
             src={project.image || "/placeholder.svg"}
             alt={project.title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover"
+            width={1000}
+            height={2000}
+            className="object-fill w-full h-full"
           />
         </motion.div>
       </div>

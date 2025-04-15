@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Send } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { AnimateWrapper, TextReveal } from "@/helpers/animations";
 import { SectionWrapper } from "@/helpers";
+import emailjs from "@emailjs/browser";
+import { toast } from "sonner";
 
 const contactPhrases = [
   "Interested in working together?",
@@ -27,18 +29,55 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentPhrase, setCurrentPhrase] = useState(0);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setLoading(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    emailjs
+      .send(
+        "service_qo8x3np",
+        "template_xz7iooi",
+        {
+          from_name: form.name,
+          to_name: "Kene",
+          from_email: form.email,
+          to_email: "kenebebhbanigo@gmail.com",
+          message: form.message,
+        },
+        "ESzMZ_WcOF5LWpCeI"
+      )
+      .then(
+        () => {
+          setLoading(false);
+          toast.success(
+            "Thank you. I will get back to you as soon as possible."
+          );
 
-    setIsSubmitting(false);
-    alert("Message sent! Thanks for reaching out.");
-
-    // Reset form
-    e.currentTarget.reset();
+          setForm({
+            name: "",
+            email: "",
+            message: "",
+          });
+        },
+        (error) => {
+          setLoading(false);
+          toast.error("Something went wrong, please try again");
+        }
+      );
   };
 
   // Rotate through phrases
@@ -110,10 +149,16 @@ export default function Contact() {
 
           <AnimateWrapper variant="slideLeft" delay={0.2}>
             <div className="bg-card rounded-2xl border p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} ref={formRef} className="space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="name">Name</Label>
-                  <Input id="name" placeholder="Your name" required />
+                  <Input
+                    id="name"
+                    placeholder="Your name"
+                    value={form.name}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
 
                 <div className="space-y-2">
@@ -121,6 +166,8 @@ export default function Contact() {
                   <Input
                     id="email"
                     type="email"
+                    value={form.email}
+                    onChange={handleChange}
                     placeholder="Your email"
                     required
                   />
@@ -130,8 +177,10 @@ export default function Contact() {
                   <Label htmlFor="message">Message</Label>
                   <Textarea
                     id="message"
-                    placeholder="Your message"
+                    placeholder="Leave me a message"
                     rows={10}
+                    value={form.message}
+                    onChange={handleChange}
                     required
                   />
                 </div>
