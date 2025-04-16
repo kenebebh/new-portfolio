@@ -35,7 +35,7 @@ const projects = [
       "Shadcn",
     ],
     image: mediqi,
-    demoUrl: "https://www.mediqihealth.com/",
+    demoUrl: "https://mediqihealth.netlify.app/",
     repoUrl: "",
     color: "from-blue-500 to-cyan-500",
     isPrivate: true, // Private repository
