@@ -176,7 +176,7 @@ function ProjectComponent({ project }: { project: (typeof projects)[0] }) {
           className="flex flex-wrap gap-2 mb-8"
         >
           {project.tags.map((tag) => (
-            <Badge key={tag} variant="secondary">
+            <Badge key={tag} variant="secondary" className="shadow-sm">
               {tag}
             </Badge>
           ))}
@@ -222,7 +222,7 @@ function ProjectComponent({ project }: { project: (typeof projects)[0] }) {
         </motion.div>
       </div>
 
-      <div className="h-1/2 md:h-full md:w-1/2 relative overflow-hidden">
+      <div className="h-1/2 md:h-full md:w-1/2 relative overflow-hidden border rounded-xl shadow-md dark:shadow-none dark:border-none">
         <div
           className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20 rounded-2xl`}
         />

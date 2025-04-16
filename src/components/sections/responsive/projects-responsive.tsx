@@ -159,9 +159,6 @@ export default function ProjectsResponsive() {
                   <Image
                     src={projects[currentProject].image || "/placeholder.svg"}
                     alt={projects[currentProject].title!}
-                    // fill
-                    // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    // className="object-fill"
                     width={1000}
                     height={2000}
                     className="object-fill w-full h-full"
@@ -169,7 +166,7 @@ export default function ProjectsResponsive() {
                 </motion.div>
               </div>
 
-              <div className="p-6">
+              <div className="p-6 pt-10">
                 <div className="flex justify-between">
                   <motion.h3
                     initial={{ opacity: 0, y: 10 }}
@@ -287,7 +284,7 @@ export default function ProjectsResponsive() {
                   key={index}
                   variants={itemVariants}
                   className={`w-3 h-3 rounded-full transition-all ${
-                    currentProject === index ? "bg-primary w-8" : "bg-muted"
+                    currentProject === index ? "bg-primary w-8" : "bg-ring"
                   }`}
                   onClick={() => goToProject(index)}
                   aria-label={`Navigate to project ${index + 1}`}
