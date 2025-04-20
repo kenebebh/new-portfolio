@@ -183,6 +183,7 @@ import { AnimateWrapper, TextReveal } from "@/helpers/animations";
 import { SectionWrapper } from "@/helpers";
 import emailjs from "@emailjs/browser";
 import { toast } from "sonner";
+import { Footer } from "@/components/layout";
 
 const contactPhrases = [
   "Interested in working together?",
@@ -275,7 +276,7 @@ export default function ContactResponsive() {
 
   return (
     <SectionWrapper>
-      <div className="py-24">
+      <div className="py-24 pb-0">
         <div className="px-4 flex flex-col gap-y-12 md:flex-row gap-x-6 md:items-center">
           <div className="flex-1">
             <AnimateWrapper
@@ -401,6 +402,10 @@ export default function ContactResponsive() {
               </div>
             </AnimateWrapper>
           </div>
+        </div>
+
+        <div className="pt-20">
+          <Footer />
         </div>
       </div>
     </SectionWrapper>
