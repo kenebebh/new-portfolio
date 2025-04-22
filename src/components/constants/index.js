@@ -18,7 +18,7 @@ const projects = [
     demoUrl: "https://www.bookumapp.com/",
     repoUrl: "",
     color: "from-blue-500 to-cyan-500",
-    isPrivate: true, // Private repository
+    isPrivate: true,
   },
   {
     id: 2,
@@ -38,7 +38,7 @@ const projects = [
     demoUrl: "https://mediqihealth.netlify.app/",
     repoUrl: "",
     color: "from-blue-500 to-cyan-500",
-    isPrivate: true, // Private repository
+    isPrivate: true,
   },
   {
     id: 3,
