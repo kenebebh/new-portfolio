@@ -11,13 +11,13 @@ const capabilities = [
     description:
       "Build and maintain production-ready user interfaces with a focus on reliability, performance, and clean UX.",
     points: [
-      "Fix UI bugs and frontend logic issues in existing codebases",
-      "Build reusable and well-structured React components",
-      "Implement features from product requirements",
-      "Integrate frontend features with REST APIs",
-      "Ensure responsive layouts and cross-browser consistency",
+      "Build scalable, production-ready user interfaces with a focus on performance, clarity, and long-term maintainability",
+      "Build fully functional apps from features defined in product requirements and designs",
+      "Integrate frontend applications with APIs (REST and GraphQL) and external services",
+      "Optimize performance, accessibility, and responsiveness across devices",
     ],
-    tools: "Next.js · React · TypeScript · Tailwind CSS · Framer Motion",
+    tools:
+      "Next.js · React · TypeScript · Tailwind CSS · Framer Motion · REST · GraphQL · React Native",
     color: "from-purple-500 to-pink-500",
   },
   {
@@ -28,9 +28,9 @@ const capabilities = [
     points: [
       "Build REST APIs using Node.js and Express",
       "Handle authentication and authorization flows",
-      "Design API contracts that support frontend needs",
+      "Design API endpoints that support frontend needs",
       "Implement validation, middleware, and error handling",
-      "Collaborate effectively with backend engineers",
+      "Collaborate effectively with other backend engineers",
     ],
     tools: "Node.js · Express · REST APIs · JWT · GraphQL",
     color: "from-blue-500 to-cyan-500",
@@ -39,10 +39,9 @@ const capabilities = [
     title: "Data & Persistence",
     icon: Database,
     description:
-      "Work with relational and NoSQL databases to support scalable and maintainable applications.",
+      "I work with NoSQL databases and use them to support scalable and maintainable applications.",
     points: [
       "Design data models aligned with product features",
-      "Work with relational and document databases",
       "Use ORMs to manage schemas and queries",
       "Understand performance and data consistency trade-offs",
     ],
@@ -78,13 +77,16 @@ export default function Skills() {
             How I Build & Maintain Products
           </h2>
           <p className="text-lg text-muted-foreground mt-6 max-w-3xl mx-auto">
-            I work on real-world web applications where I fix UI bugs, build new
-            features, and improve existing systems using Next.js and React.
+            I build modern web and mobile applications using Javascript,React,
+            Next.js, React Native and TypeScript, with a strong focus on
+            performance, optimal user experience, and clean architecture.
             <br />
             <br />
-            I’m comfortable working in established codebases, integrating APIs,
-            and collaborating with senior engineers to ship reliable,
-            maintainable features.
+            I’m comfortable working across the full lifecycle of a product —
+            from building new features from scratch to improving existing
+            systems, fixing bugs, integrating APIs, and collaborating with
+            designers and senior engineers to ship reliable, maintainable
+            software.
           </p>
         </div>
 
