@@ -40,9 +40,9 @@ export default function About() {
               Hi, I'm <span className="text-primary">Banigo Kenebebh</span>
             </h2>
             <p className="text-xl text-muted-foreground">
-              I'm a full-stack developer who loves building products that don't
-              just look good but actually help businesses grow, engage users,
-              and scale effectively.
+              I’m a product-focused software developer who enjoys building
+              applications that don’t just look good, but genuinely help
+              businesses grow, engage users, and scale effectively.
             </p>
 
             <div className="space-y-4">
@@ -54,11 +54,15 @@ export default function About() {
                 problems, and collaborating with teams to bring ideas to life.
               </p>
               <p className="text-lg">
-                Beyond coding, I'm into indie hacking, community-driven tech,
-                and food 🍕🌮—because good code and good food just make life
-                better! I believe great products are born from collaboration,
-                curiosity, and a commitment to continuous learning—and that's
-                exactly the kind of environment I love being part of.
+                I build and maintain production-ready web applications using
+                modern technologies like Next.js, React, and TypeScript, working
+                closely with designers and backend engineers to ship reliable,
+                scalable features. I also have a little experience building
+                backend systems with Node.js and Express, as well as developing
+                cross-platform mobile applications using React Native and Expo.
+                I value clean code, clear communication, and continuous
+                improvement, and I take pride in delivering solutions teams can
+                trust and build upon.
               </p>
             </div>
           </AnimateWrapper>

@@ -124,7 +124,7 @@ export default function Hero() {
         <div className="z-10 text-center px-4 max-w-5xl">
           <AnimateWrapper variant="fadeIn" playOnLoad={true}>
             <div className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary mb-6">
-              Full-Stack Developer
+              Full-Stack Web and Mobile Developer
             </div>
           </AnimateWrapper>
 

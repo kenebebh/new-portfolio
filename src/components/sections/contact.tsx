@@ -94,8 +94,8 @@ export default function Contact() {
 
   return (
     <SectionWrapper>
-      <div className="h-full w-full flex flex-col justify-between pt-20">
-        <div className="flex items-center justify-center p-4 md:p-12">
+      <div className="h-full w-full flex flex-col relative items-center justify-center p-4 md:p-12">
+        <div className="flex items-center justify-center p-4 md:p-12 ">
           <div className="grid md:grid-cols-2 gap-12 max-w-7xl w-full items-center justify-center">
             <AnimateWrapper
               variant="slideRight"
@@ -221,8 +221,9 @@ export default function Contact() {
             </AnimateWrapper>
           </div>
         </div>
-
-        <Footer />
+        <div className="absolute h-fit bottom-0 w-full">
+          <Footer />
+        </div>
       </div>
     </SectionWrapper>
   );
