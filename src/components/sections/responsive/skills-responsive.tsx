@@ -18,6 +18,65 @@ import {
   Monitor,
   Figma,
 } from "lucide-react";
+const capabilities = [
+  {
+    title: "Frontend (Next.js & React)",
+    icon: Layout,
+    description:
+      "Build and maintain production-ready user interfaces with a focus on reliability, performance, and clean UX.",
+    points: [
+      "Build scalable, production-ready user interfaces with a focus on performance, clarity, and long-term maintainability",
+      "Build fully functional apps from features defined in product requirements and designs",
+      "Integrate frontend applications with APIs (REST and GraphQL) and external services",
+      "Optimize performance, accessibility, and responsiveness across devices",
+    ],
+    tools:
+      "Next.js · React · TypeScript · Tailwind CSS · Framer Motion · REST · GraphQL · React Native",
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    title: "Backend (Working Knowledge)",
+    icon: Server,
+    description:
+      "Design and integrate backend systems that support real product workflows and frontend features.",
+    points: [
+      "Build REST APIs using Node.js and Express",
+      "Handle authentication and authorization flows",
+      "Design API endpoints that support frontend needs",
+      "Implement validation, middleware, and error handling",
+      "Collaborate effectively with other backend engineers",
+    ],
+    tools: "Node.js · Express · REST APIs · JWT · GraphQL",
+    color: "from-blue-500 to-cyan-500",
+  },
+  {
+    title: "Data & Persistence",
+    icon: Database,
+    description:
+      "I work with NoSQL databases and use them to support scalable and maintainable applications.",
+    points: [
+      "Design data models aligned with product features",
+      "Use ORMs to manage schemas and queries",
+      "Understand performance and data consistency trade-offs",
+    ],
+    tools: "PostgreSQL · MongoDB · Prisma · Redis",
+    color: "from-green-500 to-emerald-500",
+  },
+  {
+    title: "UI, UX & Accessibility",
+    icon: Palette,
+    description:
+      "Translate designs into accessible, responsive, and consistent user experiences.",
+    points: [
+      "Convert Figma designs into working interfaces",
+      "Ensure accessibility best practices",
+      "Build responsive layouts for different screen sizes",
+      "Maintain visual and interaction consistency across features",
+    ],
+    tools: "Figma · Responsive Design · Accessibility",
+    color: "from-orange-500 to-amber-500",
+  },
+];
 
 // Tech stack with icons
 const techStacks = [
@@ -78,52 +137,58 @@ export default function SkillsResponsive() {
       <div className="px-4">
         <div className="text-center mb-12">
           <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">
-            Skills
+            What I Do
           </div>
-          <h2 className="text-3xl font-bold mt-2">Technical Expertise</h2>
+          <h2 className="text-3xl font-bold mt-2">
+            How I Build & Maintain Products
+          </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            My technical toolkit is built on a foundation of modern web
-            technologies, with expertise in both frontend and backend
-            development.
+            I build modern web and mobile applications using Javascript,React,
+            Next.js, React Native and TypeScript, with a strong focus on
+            performance, optimal user experience, and clean architecture.
+            <br />
+            I’m comfortable working across the full lifecycle of a product —
+            from building new features from scratch to improving existing
+            systems, fixing bugs, integrating APIs, and collaborating with
+            designers and senior engineers to ship reliable, maintainable
+            software.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {techStacks.map((stack, stackIndex) => (
+          {capabilities.map((item, index) => (
             <motion.div
-              key={stack.category}
+              key={item.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: stackIndex * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true, margin: "-50px" }}
-              className="relative"
+              className={`relative`}
             >
               <div
-                className={`absolute inset-0 ${stack.color} opacity-5 rounded-lg`}
+                className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-6 rounded-lg`}
               />
               <div className="relative p-6 rounded-lg border backdrop-blur-sm h-full">
                 <div className="flex items-center gap-4 mb-4">
                   <div
-                    className={`p-3 rounded-full ${stack.color} bg-opacity-20`}
+                    className={`p-3 rounded-full bg-gradient-to-r ${item.color} bg-opacity-20`}
                   >
-                    <stack.icon className="h-6 w-6 text-primary" />
+                    <item.icon className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="text-xl font-bold">{stack.category}</h3>
+                  <h3 className="text-xl font-bold">{item.title}</h3>
                 </div>
+                <p className="text-muted-foreground mb-4">{item.description}</p>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {stack.technologies.map((tech) => (
-                    <div
-                      key={tech.name}
-                      className="flex flex-col items-center text-center p-2 rounded-lg hover:bg-muted/50 transition-colors"
-                    >
-                      <div className="p-2 rounded-full bg-primary/10 mb-1">
-                        <tech.icon className="h-4 w-4 text-primary" />
-                      </div>
-                      <span className="text-xs font-medium">{tech.name}</span>
-                    </div>
+                <ul className="space-y-2 mb-4 list-disc list-inside text-sm">
+                  {item.points.map((point) => (
+                    <li key={point}>{point}</li>
                   ))}
-                </div>
+                </ul>
+
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-medium text-foreground">Tools:</span>{" "}
+                  {item.tools}
+                </p>
               </div>
             </motion.div>
           ))}
